@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private PlayerInput inputActions;
+    private Transform cameraPosition;
 
     [Header("Movement")]
     [SerializeField] private Transform orientation;
@@ -51,9 +53,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchYScale;
     private float startYscale;
 
+    [Header("Interact")]
+    [SerializeField] private float interactRange = 2.5f;
+
     private void Start()
     {
         inputActions = GetComponent<PlayerInput>();
+        cameraPosition = FindFirstObjectByType<Camera>().transform;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
 
@@ -108,6 +114,31 @@ public class PlayerMovement : MonoBehaviour
             crouching = false;
         }
         
+    }
+
+    public void InteactAction()
+    {
+        Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
+        Interactable closetInteractable = null;
+        float currentDot = 0;
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            if (Vector3.Distance(interactables[i].transform.position, transform.position) < interactRange)
+            {
+                Vector3 direction = interactables[i].transform.position - cameraPosition.position;
+                float dot = Vector3.Dot(direction, cameraPosition.forward);
+
+                if (dot < currentDot)
+                {
+                    currentDot = dot;
+                    closetInteractable = interactables[i];
+                }
+            }
+        }
+
+        if (closetInteractable != null)
+            closetInteractable.Interact();
     }
 
     private void StateHandler()
