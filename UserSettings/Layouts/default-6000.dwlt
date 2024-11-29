@@ -340,8 +340,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1172.8
-    y: 79.200005
+    x: 1173.8
+    y: 24
     width: 362.19995
     height: 690.8
   m_SerializedDataModeController:
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79.200005
+    y: 24
     width: 289.4
     height: 398
   m_SerializedDataModeController:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 44a50000
+      m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: fa45ffff7e70ffff1a73ffffa0d0ffff74faffffbaa40000
       m_RenameOverlay:
@@ -455,8 +455,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 290.4
-    y: 79.200005
+    x: 291.4
+    y: 24
     width: 880.4
     height: 398
   m_SerializedDataModeController:
@@ -929,13 +929,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 3.763816, y: -0.55555695, z: 0.07229936}
+    m_Target: {x: 0, y: 0, z: 0}
     speed: 2
-<<<<<<< Updated upstream
-    m_Value: {x: 5.2252755, y: -0.15340525, z: -0.88669884}
-=======
     m_Value: {x: 3.763816, y: -0.55555695, z: 0.07229936}
->>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -981,21 +977,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.084980756, y: 0.72224075, z: -0.09016215, w: 0.6805451}
+    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
     speed: 2
-<<<<<<< Updated upstream
-    m_Value: {x: 0.05116488, y: 0.8618483, z: -0.088739164, w: 0.49676707}
-=======
     m_Value: {x: 0.08497548, y: 0.72219586, z: -0.09015655, w: 0.68050283}
->>>>>>> Stashed changes
   m_Size:
-    m_Target: 3.292832
+    m_Target: 10
     speed: 2
-<<<<<<< Updated upstream
-    m_Value: 4.7031054
-=======
     m_Value: 3.292832
->>>>>>> Stashed changes
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1148,7 +1136,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 503.2
+    y: 448
     width: 1171.8
     height: 266.8
   m_SerializedDataModeController:
@@ -1190,15 +1178,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-<<<<<<< Updated upstream
-    m_SelectedIDs: 08b40000
-    m_LastClickedID: 46088
-    m_ExpandedIDs: 
-=======
     m_SelectedIDs: 44a50000
     m_LastClickedID: 42308
-    m_ExpandedIDs: 0000000044a5000046a5000048a500004aa500001cab000000ca9a3b
->>>>>>> Stashed changes
+    m_ExpandedIDs: 0000000018a500001aa500001ca500001ea50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1227,7 +1209,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 0000000018a500001aa500001ca500001ea50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
