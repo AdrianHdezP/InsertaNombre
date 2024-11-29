@@ -7,6 +7,10 @@ public class EnemyController : MonoBehaviour
 
     [Header("MOVEMENT")]
     [SerializeField] Vector3 targetPosition;
+    [SerializeField] float attackingSpeed;
+    [SerializeField] float wanderingSpeed;
+    [SerializeField] float minDistance;
+
     [SerializeField] Transform[] pathPoints;
     [SerializeField] int pathIndex;
     [SerializeField] LayerMask playerLayer;
@@ -23,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent agent;
     Transform playerCameraTf;
+
 
     enum States
     {
@@ -42,6 +47,8 @@ public class EnemyController : MonoBehaviour
     {
         if (currentState == States.wandering)
         {
+            agent.speed = wanderingSpeed;
+
             if (pathPoints.Length > 0)
             {
                 if (NavMesh.SamplePosition(pathPoints[pathIndex].position, out NavMeshHit hit, 100, -1) && Vector3.Distance(hit.position, transform.position - Vector3.up * agent.baseOffset) < 0.2f)
@@ -75,7 +82,12 @@ public class EnemyController : MonoBehaviour
         }
         else if (currentState == States.attacking)
         {
-            targetPosition = playerCameraTf.position;
+            if (Vector3.Distance(transform.position, playerCameraTf.position) < detectionRange) agent.speed = attackingSpeed;
+            else agent.speed = attackingSpeed;
+
+            if (Vector3.Distance(transform.position, playerCameraTf.position) > minDistance) targetPosition = playerCameraTf.position;
+            else targetPosition = transform.position;
+
         }
         else if (currentState == States.stopped)
         {

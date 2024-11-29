@@ -266,4 +266,10 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = false;
     }
 
+
+    public void RecieveDamage(int amount)
+    {
+
+    }
+
 }
