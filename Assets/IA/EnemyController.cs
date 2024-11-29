@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform[] pathPoints;
     [SerializeField] int pathIndex;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] LayerMask obstacleLayer;
     [SerializeField] Transform visionTf;
 
     [Header("COMBAT")]
@@ -41,7 +42,7 @@ public class EnemyController : MonoBehaviour
     {
         if (currentState == States.wandering)
         {
-            if (pathPoints.Length >= 0)
+            if (pathPoints.Length > 0)
             {
                 if (NavMesh.SamplePosition(pathPoints[pathIndex].position, out NavMeshHit hit, 100, -1) && Vector3.Distance(hit.position, transform.position - Vector3.up * agent.baseOffset) < 0.2f)
                 {
@@ -58,10 +59,15 @@ public class EnemyController : MonoBehaviour
 
             if (Vector3.Distance(playerCameraTf.position, transform.position) < detectionRange)
             {
-                if (Physics.Raycast(visionTf.position, (playerCameraTf.position - visionTf.position).normalized, out RaycastHit hit))
+                Debug.Log("DISTANCE CHECK");
+
+                Debug.DrawRay(visionTf.position, playerCameraTf.position - visionTf.position);
+
+                if (Physics.Raycast(visionTf.position, (playerCameraTf.position - visionTf.position).normalized, out RaycastHit hit, detectionRange))
                 {
-                    if (hit.rigidbody && hit.rigidbody.gameObject.layer == playerLayer)
+                    if (hit.transform.gameObject.CompareTag("Player"))
                     {
+                        Debug.Log("VISION CHECK");
                         currentState = States.attacking;
                     }
                 }
@@ -69,7 +75,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (currentState == States.attacking)
         {
-
+            targetPosition = playerCameraTf.position;
         }
         else if (currentState == States.stopped)
         {
@@ -99,7 +105,7 @@ public class EnemyController : MonoBehaviour
         }
 
 
-        if (currentState != States.stopped) agent.destination = targetPosition;
+        if (currentState != States.stopped && agent.isActiveAndEnabled) agent.destination = targetPosition;
 
     }
 
