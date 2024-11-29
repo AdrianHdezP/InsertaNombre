@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 direction = interactables[i].transform.position - cameraPosition.position;
                 float dot = Vector3.Dot(direction, cameraPosition.forward);
 
-                if (dot < currentDot)
+                if (dot > currentDot)
                 {
                     currentDot = dot;
                     closetInteractable = interactables[i];
