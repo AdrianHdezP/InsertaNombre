@@ -7,5 +7,7 @@ public class Interactable_Bomb : Interactable
     public override void Interact()
     {
         bomb.SetActive(true);
+
+        GameManager.Instance.AddBomb();
     }
 }

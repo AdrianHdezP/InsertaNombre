@@ -56,6 +56,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interact")]
     [SerializeField] private float interactRange = 2.5f;
 
+    [Header("Health")]
+    [SerializeField] private int health = 100;
+
     private void Start()
     {
         inputActions = GetComponent<PlayerInput>();
@@ -267,9 +270,6 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void RecieveDamage(int amount)
-    {
-
-    }
+    public void RecieveDamage(int amount) => health -= amount;
 
 }

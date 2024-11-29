@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\EnemyProyectile.cs" />
     <Compile Include="Assets\Scripts\Interactable_Hostage.cs" />
+    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Interactable_Bomb.cs" />
     <Compile Include="Assets\Scripts\CameraHolder.cs" />
