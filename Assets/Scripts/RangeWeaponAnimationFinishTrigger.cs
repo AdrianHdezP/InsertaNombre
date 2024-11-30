@@ -11,6 +11,11 @@ public class RangeWeaponAnimationFinishTrigger : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    public void Shoot()
+    {
+        weaponHolder.Shoot();
+    }
+
     public void FinishReload()
     {
         anim.SetBool("Reload", false);

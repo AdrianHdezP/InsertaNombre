@@ -134,7 +134,7 @@ public class Weapon : MonoBehaviour
             }
 
             if (CanShoot())
-                Shoot();
+                ShootAnimation();
         }
         else
         {
@@ -149,12 +149,13 @@ public class Weapon : MonoBehaviour
 
     private bool CanShoot() => canShoot;
 
-    private void Shoot()
+    private void ShootAnimation() => rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Shoot", true);
+
+    public void Shoot()
     {
         canShoot = false;
         magazine--;
-        rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Shoot", true);
-        Proyectile proyectile = Instantiate(bulletsPrefab, Camera.main.transform.position , Quaternion.LookRotation(Camera.main.transform.forward));
+        Proyectile proyectile = Instantiate(bulletsPrefab, Camera.main.transform.position, Quaternion.LookRotation(Camera.main.transform.forward));
         StartCoroutine(FireRate());
     }
 

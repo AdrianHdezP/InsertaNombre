@@ -64,6 +64,7 @@
     <Compile Include="Assets\IA\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Proyectile.cs" />
     <Compile Include="Assets\Scripts\Interactable_Door.cs" />
+    <Compile Include="Assets\Scripts\Audios.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\NewInputSystem\InputSystem_Actions.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
