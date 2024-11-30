@@ -43,6 +43,7 @@ public class Weapon : MonoBehaviour
         canShoot = true;
         canReload = false;
         isRange = true;
+        canSwaap = true;
     }
 
     private void Update()
