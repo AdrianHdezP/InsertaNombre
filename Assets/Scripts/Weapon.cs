@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
+    private InputSystem_Actions inputSystemActions;
+
     [SerializeField] private GameObject meleeWeapon;
     [SerializeField] private GameObject rangeWeapon;
 
@@ -15,14 +17,24 @@ public class Weapon : MonoBehaviour
 
     [HideInInspector] public bool canReload;
     [HideInInspector] public bool canShoot;
+    [HideInInspector] public bool pressed;
+    [HideInInspector] public bool isRange;
 
     public Proyectile bulletsPrefab;
     public Proyectile meleePrefab;
 
-    public bool isRange;
+    private void Awake()
+    {
+        inputSystemActions = new InputSystem_Actions();
+        inputSystemActions.Player.Enable();
+    }
+
 
     private void Start()
     {
+        inputSystemActions.Player.Shoot.performed += ShootingPerformed;
+        inputSystemActions.Player.Shoot.canceled += ShootingCanceled;
+
         canShoot = true;
         canReload = false;
         isRange = true;
@@ -34,7 +46,10 @@ public class Weapon : MonoBehaviour
             canReload = true;
 
         if (magazine <= 0)
-            canShoot = false;   
+            canShoot = false;
+
+        if (pressed)
+            ShootAction();
     }
 
     public void ChangeWeaponAction()
@@ -58,6 +73,7 @@ public class Weapon : MonoBehaviour
         if (CanReload())
         {
             canShoot = false;
+            
 
             int bullets = 15 - magazine;
 
@@ -76,6 +92,16 @@ public class Weapon : MonoBehaviour
 
             canReload = false;  
         }
+    }
+
+    private void ShootingPerformed(InputAction.CallbackContext context)
+    {
+        pressed = true;
+    }
+
+    private void ShootingCanceled(InputAction.CallbackContext context)
+    {
+        pressed = false;
     }
 
     public void ShootAction()
@@ -98,7 +124,6 @@ public class Weapon : MonoBehaviour
                 Melee();
             }
         }
-
     }
 
     private bool CanReload() => canReload;

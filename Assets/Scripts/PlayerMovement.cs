@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private PlayerInput inputActions;
+    private InputSystem_Actions inputSystemActions;
     private Transform cameraPosition;
 
     [Header("Movement")]
@@ -56,18 +57,27 @@ public class PlayerMovement : MonoBehaviour
     [Header("Interact")]
     [SerializeField] private float interactRange = 2.5f; 
     [HideInInspector] public Interactable closestInteractable = null;
+    private bool canInteract;
 
     [Header("Health")]
     public int maxHealth = 100;
     [HideInInspector] public int health = 100;
 
+    private void Awake()
+    {
+        inputSystemActions = new InputSystem_Actions();
+        inputSystemActions.Player.Enable();
+    }
+
     private void Start()
     {
-        health = maxHealth;
-
         inputActions = GetComponent<PlayerInput>();
         cameraPosition = FindFirstObjectByType<Camera>().transform;
         rb = GetComponent<Rigidbody>();
+
+        inputSystemActions.Player.Interact.performed += InteractPerformed;
+        //inputSystemActions.Player.Interact.canceled += InteractCanceled;
+
         rb.freezeRotation = true;
 
         moveSpeed = walkSpeed;
@@ -75,22 +85,35 @@ public class PlayerMovement : MonoBehaviour
         lastDesiredMoveSpeed = walkSpeed;
         startYscale = transform.localScale.y;
         readyToJump = true;
+
+        canInteract = false;
+
+        health = maxHealth;
     }
 
     private void Update()
     {
+        Debug.Log(canInteract);
         AxixInputs();
         StateHandler();
         SpeedControl();
         GroundCheck();
 
         GetInteractions();
+
+        if (canInteract)
+        {
+            InteactAction();
+            canInteract = false;
+        }
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
     }
+
+    #region Inputs & Actions
 
     private void AxixInputs()
     {
@@ -125,10 +148,12 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    #region Interact
+
     void GetInteractions()
     {
         Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
-        
+
         float currentDot = 0;
         closestInteractable = null;
 
@@ -142,19 +167,38 @@ public class PlayerMovement : MonoBehaviour
                 if (dot > currentDot)
                 {
                     currentDot = dot;
-                    closestInteractable = interactables[i];                    
+                    closestInteractable = interactables[i];
                 }
             }
         }
+    }
 
+    private void InteractPerformed(InputAction.CallbackContext context)
+    {
+        canInteract = true;
+        StartCoroutine(Wait());
+    }
+
+    private void InteractCanceled(InputAction.CallbackContext context)
+    {
+        canInteract= false;
     }
 
     public void InteactAction()
     {
-
         if (closestInteractable != null)
             closestInteractable.Interact();
     }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.01f);
+        canInteract = false;
+    }
+
+    #endregion
+
+    #endregion
 
     private void StateHandler()
     {
@@ -183,6 +227,8 @@ public class PlayerMovement : MonoBehaviour
 
         lastDesiredMoveSpeed = desiredMoveSpeed;
     }
+
+    #region Move Things
 
     private void MovePlayer()
     {
@@ -281,6 +327,9 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = false;
     }
 
+    #endregion
+
+    #region Health
 
     public void RecieveDamage(int amount) => health -= amount;
 
@@ -290,6 +339,6 @@ public class PlayerMovement : MonoBehaviour
         else health = maxHealth;
     }
 
-
+    #endregion
 
 }
