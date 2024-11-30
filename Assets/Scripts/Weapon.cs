@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
 
 
     [HideInInspector] public bool canReload;
+    [HideInInspector] public bool canSwaap;
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool pressed;
     [HideInInspector] public bool isRange;
@@ -81,6 +82,9 @@ public class Weapon : MonoBehaviour
 
     public void ChangeWeaponAction()
     {
+        if (!canSwaap)
+            return;
+
         if (rangeWeapon.activeSelf == true)
         {
             isRange = false;
@@ -93,6 +97,8 @@ public class Weapon : MonoBehaviour
             rangeWeapon.SetActive(true);
             meleeWeapon.SetActive(false);
         }
+
+        canSwaap = true;
     }
 
     public void ReloadAction()
@@ -116,6 +122,7 @@ public class Weapon : MonoBehaviour
             }
 
             rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Reload", true);
+            canSwaap = false;
             weaponEffects.volume = 1;
             weaponEffects.PlayOneShot(audios.rangeReload);
 
@@ -153,7 +160,11 @@ public class Weapon : MonoBehaviour
 
     private bool CanShoot() => canShoot;
 
-    private void ShootAnimation() => rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Shoot", true);
+    private void ShootAnimation()
+    {
+        rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Shoot", true);
+        canSwaap = false;
+    }
 
     public void Shoot()
     {
@@ -170,6 +181,7 @@ public class Weapon : MonoBehaviour
         canShoot = false;
         weaponEffects.volume = 0.25f;
         meleeWeapon.GetComponent<MeleeWeaponAnimationFinishTrigger>().anim.SetTrigger("Swing");
+        canSwaap = false;
         weaponEffects.PlayOneShot(audios.meleeAttack);
         StartCoroutine(MeleeRate());
     }

@@ -20,10 +20,12 @@ public class RangeWeaponAnimationFinishTrigger : MonoBehaviour
     {
         anim.SetBool("Reload", false);
         weaponHolder.canShoot = true;
+        weaponHolder.canSwaap = true;
     }
 
     public void FinishShoot()
     {
         anim.SetBool("Shoot", false);
+        weaponHolder.canSwaap = true;
     }
 }

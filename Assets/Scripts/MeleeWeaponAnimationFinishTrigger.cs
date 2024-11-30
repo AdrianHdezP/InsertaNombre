@@ -14,5 +14,11 @@ public class MeleeWeaponAnimationFinishTrigger : MonoBehaviour
     public void SwingMopTrigger()
     {
         weaponHolder.MeleeProyectileSpawn();
+        
+    }
+
+    public void AAAAA()
+    {
+        weaponHolder.canSwaap = true;
     }
 }
