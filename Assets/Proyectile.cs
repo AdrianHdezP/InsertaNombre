@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyProyectile : MonoBehaviour
+public class Proyectile : MonoBehaviour
 {
     [SerializeField] int damage;
     [SerializeField] float moveSpeed;
@@ -15,6 +15,7 @@ public class EnemyProyectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody && other.attachedRigidbody.TryGetComponent(out PlayerMovement move)) move.RecieveDamage(damage);
+        else if (other.transform.TryGetComponent(out EnemyController enemy)) enemy.RecieveDamage(damage);
 
         Destroy(gameObject);
     }

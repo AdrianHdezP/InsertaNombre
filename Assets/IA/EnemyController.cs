@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] bool startClosest;
     [SerializeField] float width;
     [SerializeField] float shotTime;
-    [SerializeField] EnemyProyectile proyectilePF;
+    [SerializeField] Proyectile proyectilePF;
 
     NavMeshAgent agent;
     Transform playerCameraTf;
@@ -48,6 +48,8 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         playerCameraTf = FindFirstObjectByType<Camera>().transform;
+
+        currentHp = maxHp;
     }
 
     private void Update()
@@ -97,7 +99,7 @@ public class EnemyController : MonoBehaviour
 
             if (canSeePlayer && shotT <= 0)
             {
-                EnemyProyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
+                Proyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
                 shotT = shotTime;
             }
 
@@ -143,6 +145,7 @@ public class EnemyController : MonoBehaviour
 
     public void RecieveDamage(int amount)
     {
+        Debug.Log("RECIEVED DAMAGE");
         if (currentHp - amount > 0)
         {
             currentHp -= amount;

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 475907703137665354}
   - component: {fileID: 384755829378652661}
   - component: {fileID: -7565733089258429053}
-  m_Layer: 7
-  m_Name: Proyectile
+  m_Layer: 3
+  m_Name: EnemyProyectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   moveSpeed: 16
+  destroyTime: 5
 --- !u!54 &-7565733089258429053
 Rigidbody:
   m_ObjectHideFlags: 0

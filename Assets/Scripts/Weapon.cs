@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Weapon : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public bool canReload;
     [HideInInspector] public bool canShoot;
 
-    public GameObject bulletsPrefab;
+    public Proyectile bulletsPrefab;
 
     private void Start()
     {
@@ -91,6 +92,7 @@ public class Weapon : MonoBehaviour
         canShoot = false;
         magazine--;
         rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Shoot", true);
+        Proyectile proyectile = Instantiate(bulletsPrefab, Camera.main.transform.position , Quaternion.LookRotation(Camera.main.transform.forward));
         StartCoroutine(FireRate());
     }
 
