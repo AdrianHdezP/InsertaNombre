@@ -8,19 +8,24 @@ public class Weapon : MonoBehaviour
     [SerializeField] private GameObject rangeWeapon;
 
     public float fireRate = 1;
+    public float meleeRate = 1;
     public int magazine = 15;
     public int totalBullets = 60;
-    private int bullets = 0;
+
 
     [HideInInspector] public bool canReload;
     [HideInInspector] public bool canShoot;
 
     public Proyectile bulletsPrefab;
+    public Proyectile meleePrefab;
+
+    public bool isRange;
 
     private void Start()
     {
         canShoot = true;
         canReload = false;
+        isRange = true;
     }
 
     private void Update()
@@ -36,11 +41,13 @@ public class Weapon : MonoBehaviour
     {
         if (rangeWeapon.activeSelf == true)
         {
+            isRange = false;
             rangeWeapon.SetActive(false);
             meleeWeapon.SetActive(true);
         }
         else
         {
+            isRange = true;
             rangeWeapon.SetActive(true);
             meleeWeapon.SetActive(false);   
         }
@@ -52,7 +59,7 @@ public class Weapon : MonoBehaviour
         {
             canShoot = false;
 
-            bullets = 15 - magazine;
+            int bullets = 15 - magazine;
 
             if (totalBullets + magazine >= 15)
             {
@@ -73,14 +80,25 @@ public class Weapon : MonoBehaviour
 
     public void ShootAction()
     {
-        if (magazine == 0 && totalBullets > 0)
+        if (isRange)
         {
-            ReloadAction();
-            return;
+            if (magazine == 0 && totalBullets > 0)
+            {
+                ReloadAction();
+                return;
+            }
+
+            if (CanShoot())
+                Shoot();
+        }
+        else
+        {
+            if (CanShoot())
+            {
+                Melee();
+            }
         }
 
-        if (CanShoot())
-            Shoot();
     }
 
     private bool CanReload() => canReload;
@@ -96,9 +114,44 @@ public class Weapon : MonoBehaviour
         StartCoroutine(FireRate());
     }
 
+    private void Melee()
+    {
+        canShoot = false;
+        meleeWeapon.GetComponent<MeleeWeaponAnimationFinishTrigger>().anim.SetTrigger("Swing");
+        StartCoroutine(MeleeRate());
+    }
+    public void MeleeProyectileSpawn() //ON ANIM
+    {
+        Proyectile proyectile = Instantiate(meleePrefab, Camera.main.transform.position, Quaternion.LookRotation(Camera.main.transform.forward));
+    }
+
     private IEnumerator FireRate()
     {
-        yield return new WaitForSeconds(fireRate);
+        float t = 0;
+
+        while (t < fireRate)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
         canShoot = true;
+    }
+    private IEnumerator MeleeRate()
+    {
+        float t = 0;
+
+        while (t < meleeRate)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        canShoot = true;
+    }
+
+    public void RestoreAmmo(int amount)
+    {
+        totalBullets += amount;
     }
 }

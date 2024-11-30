@@ -57,10 +57,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float interactRange = 2.5f;
 
     [Header("Health")]
-    [SerializeField] private int health = 100;
+    public int maxHealth = 100;
+    [HideInInspector] public int health = 100;
 
     private void Start()
     {
+        health = maxHealth;
+
         inputActions = GetComponent<PlayerInput>();
         cameraPosition = FindFirstObjectByType<Camera>().transform;
         rb = GetComponent<Rigidbody>();
@@ -271,5 +274,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     public void RecieveDamage(int amount) => health -= amount;
+
+    public void HealDamage(int amount)
+    {
+        if (health + amount < maxHealth) health += amount;
+        else health = maxHealth;
+    }
+
+
 
 }

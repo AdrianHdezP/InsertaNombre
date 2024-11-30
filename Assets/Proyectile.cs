@@ -9,7 +9,7 @@ public class Proyectile : MonoBehaviour
     private void Awake()
     {
         AddForce(transform.forward);
-        Destroy(gameObject, 5);
+        Destroy(gameObject, destroyTime);
     }
 
     private void OnTriggerEnter(Collider other)
