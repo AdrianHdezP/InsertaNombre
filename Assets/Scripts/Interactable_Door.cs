@@ -11,7 +11,7 @@ public class Interactable_Door : Interactable
 
     public override void Interact()
     {
-        
+        GameManager.Instance.playerSC.anim.SetTrigger("Kick");
         anim.SetBool("Open", true);
         triggered = true;
     }

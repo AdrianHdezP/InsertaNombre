@@ -8,7 +8,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput inputActions;
     private InputSystem_Actions inputSystemActions;
+    [HideInInspector] public Animator anim;
     private Transform cameraPosition;
+    [SerializeField] private AudioSource playerEffects;
+    [SerializeField] private AudioSource eqRadio;
+    public GameObject kick;
 
     [Header("Movement")]
     [SerializeField] private Animator flashAnim;
@@ -75,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inputSystemActions = new InputSystem_Actions();
         inputSystemActions.Player.Enable();
+        anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -82,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         inputActions = GetComponent<PlayerInput>();
         cameraPosition = FindFirstObjectByType<Camera>().transform;
         rb = GetComponent<Rigidbody>();
+         
 
         inputSystemActions.Player.Interact.performed += InteractPerformed;
 
@@ -114,6 +120,15 @@ public class PlayerMovement : MonoBehaviour
         {
             InteactAction();
             canInteract = false;
+        }
+
+        if (state == MovementState.crouching)
+        {
+            kick.SetActive(false);
+        }
+        else
+        {
+            kick.SetActive(true);
         }
     }
 

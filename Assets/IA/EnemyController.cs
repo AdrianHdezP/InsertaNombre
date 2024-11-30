@@ -4,8 +4,10 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public Audios audios;
     private Animator anim;
     private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
 
     [SerializeField] States currentState;
 
@@ -58,6 +60,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -345,5 +348,6 @@ public class EnemyController : MonoBehaviour
     public void Attack()
     {
         Proyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
+        audioSource.PlayOneShot(audios.enemyRangeAttack);
     }
 }

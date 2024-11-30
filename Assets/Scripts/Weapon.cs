@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private AudioSource weaponEffects;
+    [SerializeField] private Audios audios;
     private PlayerMovement playerMovement;
     private InputSystem_Actions inputSystemActions;
 
@@ -114,6 +116,8 @@ public class Weapon : MonoBehaviour
             }
 
             rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Reload", true);
+            weaponEffects.volume = 1;
+            weaponEffects.PlayOneShot(audios.rangeReload);
 
             canReload = false;  
         }
@@ -155,6 +159,8 @@ public class Weapon : MonoBehaviour
     {
         canShoot = false;
         magazine--;
+        weaponEffects.volume = 1;
+        weaponEffects.PlayOneShot(audios.rangeAttack);
         Proyectile proyectile = Instantiate(bulletsPrefab, Camera.main.transform.position, Quaternion.LookRotation(Camera.main.transform.forward));
         StartCoroutine(FireRate());
     }
@@ -162,7 +168,9 @@ public class Weapon : MonoBehaviour
     private void Melee()
     {
         canShoot = false;
+        weaponEffects.volume = 0.25f;
         meleeWeapon.GetComponent<MeleeWeaponAnimationFinishTrigger>().anim.SetTrigger("Swing");
+        weaponEffects.PlayOneShot(audios.meleeAttack);
         StartCoroutine(MeleeRate());
     }
     public void MeleeProyectileSpawn() //ON ANIM

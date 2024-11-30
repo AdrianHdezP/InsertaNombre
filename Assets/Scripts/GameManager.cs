@@ -7,7 +7,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timeTextMesh;
     [SerializeField] TextMeshProUGUI hpTextMesh;
-    [SerializeField] TextMeshProUGUI weaponTextMesh;
+    [SerializeField] TextMeshProUGUI weaponNameTextMesh;
+    [SerializeField] TextMeshProUGUI weaponBulletsTextMesh;
+    [SerializeField] GameObject weaponBullets;
     [SerializeField] TextMeshProUGUI actionTextMesh;
 
     [SerializeField] Image faceImage;
@@ -81,8 +83,17 @@ public class GameManager : MonoBehaviour
         hpTextMesh.text = playerSC.health.ToString("0") + " HP";
         faceImage.sprite = faceSprites[Mathf.RoundToInt((faceSprites.Length - 1) * ((float)playerSC.health / playerSC.maxHealth))];
 
-        if (playerWeaponSC.isRange) weaponTextMesh.text = "Cleaner 3000 <br>" + playerWeaponSC.magazine + "/" + playerWeaponSC.totalBullets;
-        else weaponTextMesh.text = "Power M.O.P. <br> (Melee)";
+        if (playerWeaponSC.isRange)
+        {
+            weaponNameTextMesh.text = "Cleaner 3000";
+            weaponBullets.SetActive(true);
+            weaponBulletsTextMesh.text = playerWeaponSC.magazine + "/" + playerWeaponSC.totalBullets;
+        }
+        else
+        {
+            weaponNameTextMesh.text = "Power M.O.P.";
+            weaponBullets.SetActive(false);
+        }
 
         if (playerSC.closestInteractable != null)
         {
