@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,7 +10,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Vector3 targetPosition;
     [SerializeField] float attackingSpeed;
     [SerializeField] float wanderingSpeed;
-    [SerializeField] float minDistance;
+    [SerializeField] Vector2 distanceRange;
 
     [SerializeField] Transform[] pathPoints;
     [SerializeField] int pathIndex;
@@ -24,11 +25,16 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float stoppedTime;
     float stoppedT;
 
+    [Header("WEAPON")]
+    [SerializeField] float width;
+    [SerializeField] float shotTime;
+    [SerializeField] EnemyProyectile proyectilePF;
 
     NavMeshAgent agent;
     Transform playerCameraTf;
 
-
+    bool canSeePlayer;
+    float shotT;
     enum States
     {
         wandering,
@@ -83,11 +89,23 @@ public class EnemyController : MonoBehaviour
         else if (currentState == States.attacking)
         {
             if (Vector3.Distance(transform.position, playerCameraTf.position) < detectionRange) agent.speed = attackingSpeed;
-            else agent.speed = attackingSpeed;
+            else agent.speed = wanderingSpeed;
 
-            if (Vector3.Distance(transform.position, playerCameraTf.position) > minDistance) targetPosition = playerCameraTf.position;
-            else targetPosition = transform.position;
+            if (Vector3.Distance(transform.position, playerCameraTf.position) < distanceRange.y)
+            {
+                FindHitPosition();
 
+                if (canSeePlayer && shotT <= 0)
+                {
+                    EnemyProyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
+                    shotT = shotTime;
+                }
+            }
+
+            if (shotT > 0)
+            {
+                shotT -= Time.deltaTime;
+            }
         }
         else if (currentState == States.stopped)
         {
@@ -119,6 +137,8 @@ public class EnemyController : MonoBehaviour
 
         if (currentState != States.stopped && agent.isActiveAndEnabled) agent.destination = targetPosition;
 
+
+
     }
 
     public void RecieveDamage(int amount)
@@ -134,5 +154,124 @@ public class EnemyController : MonoBehaviour
             currentHp = 0;
             currentState = States.dying;
         }
+    }
+
+    bool FindHitPosition()
+    {
+
+        Vector3 direction = (transform.position - playerCameraTf.position).normalized;
+
+        if (CheckRays(visionTf.position))
+        {
+            targetPosition = transform.position;
+            canSeePlayer = true;
+            return true;
+        }
+        else if (CheckRays(targetPosition))
+        {
+            canSeePlayer = false;
+            return true;
+        }
+        else
+        {
+            canSeePlayer = false;
+            float range = distanceRange.y;
+
+            for (; range > distanceRange.x; range -= 0.5f)
+            {
+                for (float i = 0; i < 1; i += 0.05f)
+                {
+                    Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+                    rotation *= Quaternion.AngleAxis(-45 + 90 * i, Vector3.up);
+
+                    Vector3 firePosition = playerCameraTf.position + (rotation * Vector3.forward) * range;
+
+                    if (CheckRays(firePosition))
+                    {
+                        targetPosition = firePosition;
+                        return true;
+                    }
+                }
+            }
+
+            targetPosition = playerCameraTf.position;
+            return false;
+        }
+    }
+
+    bool CheckRays(Vector3 position)
+    {
+        Vector3 baseOffset = visionTf.localPosition + Vector3.up * agent.baseOffset;
+
+        Ray ray = new Ray();
+        ray.origin = position;
+        ray.direction = (playerCameraTf.position - ray.origin).normalized;
+        Quaternion rotation = Quaternion.LookRotation(ray.direction, Vector3.up);
+
+        if (NavMesh.SamplePosition(ray.origin, out NavMeshHit meshHit, 50, -1))
+        {
+            ray.origin = meshHit.position + baseOffset;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            {
+                if (!hit.transform.gameObject.CompareTag("Player"))
+                {
+                    return false;
+                    
+                }
+                else
+                {
+                    Debug.DrawRay(ray.origin, playerCameraTf.position - ray.origin, Color.white);
+                }
+            }
+            else return false;
+        }
+        
+
+        ray.origin = position + rotation * Vector3.right * width * 0.5f;
+        ray.direction = (playerCameraTf.position - ray.origin).normalized;
+
+        if (NavMesh.SamplePosition(ray.origin, out meshHit, 50, -1))
+        {
+            ray.origin = meshHit.position + baseOffset;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            {
+                if (!hit.transform.gameObject.CompareTag("Player"))
+                {
+                    return false;
+                }
+                else
+                {
+                    Debug.DrawRay(ray.origin, playerCameraTf.position - ray.origin, Color.white);
+                }
+            }
+            else return false;
+        }
+
+
+        ray.origin = position - rotation * Vector3.right * width * 0.5f;
+        ray.direction = (playerCameraTf.position - ray.origin).normalized;
+
+       
+        if (NavMesh.SamplePosition(ray.origin, out meshHit, 50, -1))
+        {
+            ray.origin = meshHit.position + baseOffset;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            {
+                if (!hit.transform.gameObject.CompareTag("Player"))
+                {
+                    return false;
+                }
+                else
+                {
+                    Debug.DrawRay(ray.origin, playerCameraTf.position - ray.origin, Color.white);
+                }
+            }
+            else return false;
+        }
+
+        return true;
     }
 }
