@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\Scripts\Interactable_Hostage.cs" />
     <Compile Include="Assets\Scripts\MeleeWeaponAnimationFinishTrigger.cs" />
+    <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\Interactable_Bomb.cs" />
