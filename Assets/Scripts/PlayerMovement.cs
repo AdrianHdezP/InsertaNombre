@@ -75,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
     int numberOfHits;
     Coroutine poisonCR;
 
+    bool isPaused;
+    public GameObject pausePanel;
+
     private void Awake()
     {
         inputSystemActions = new InputSystem_Actions();
@@ -135,6 +138,22 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+    }
+
+    public void Pause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            pausePanel.SetActive(false);
+        }
     }
 
     #region Inputs & Actions
