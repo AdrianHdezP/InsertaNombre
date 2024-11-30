@@ -1,14 +1,17 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timeTextMesh;
-    [SerializeField] float secondsLeft;
     [SerializeField] TextMeshProUGUI hpTextMesh;
     [SerializeField] TextMeshProUGUI weaponTextMesh;
     [SerializeField] TextMeshProUGUI actionTextMesh;
+
+    [SerializeField] Image faceImage;
+    [SerializeField] Sprite[] faceSprites;
 
     [HideInInspector] public PlayerMovement playerSC;
     [HideInInspector] public Weapon playerWeaponSC;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
 
+    [SerializeField] float secondsLeft;
     public int timeInSeconds;
     float secT;
     public static GameManager Instance
@@ -73,7 +77,9 @@ public class GameManager : MonoBehaviour
                 timeTextMesh.text = Mathf.FloorToInt(timeInSeconds / 60f).ToString("00") + ":" + (timeInSeconds % 60).ToString("00");
             }
         }
+
         hpTextMesh.text = playerSC.health.ToString("0") + " HP";
+        faceImage.sprite = faceSprites[Mathf.RoundToInt((faceSprites.Length - 1) * ((float)playerSC.health / playerSC.maxHealth))];
 
         if (playerWeaponSC.isRange) weaponTextMesh.text = "Cleaner 3000 <br>" + playerWeaponSC.magazine + "/" + playerWeaponSC.totalBullets;
         else weaponTextMesh.text = "Power M.O.P. <br> (Melee)";
@@ -81,7 +87,7 @@ public class GameManager : MonoBehaviour
         if (playerSC.closestInteractable != null)
         {
             actionTextMesh.gameObject.SetActive(true);
-            actionTextMesh.text = "Press \"y\" To " + playerSC.closestInteractable.actionText;
+            actionTextMesh.text = "Press \"Y\" To " + playerSC.closestInteractable.actionText;
         }
         else actionTextMesh.gameObject.SetActive(false);
     }

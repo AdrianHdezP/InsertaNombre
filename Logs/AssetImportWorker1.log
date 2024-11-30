@@ -1389,3 +1389,119 @@ Memory consumption went from 181.1 MB to 176.6 MB.
 Total: 11.186100 ms (FindLiveObjects: 1.018600 ms CreateObjectMapping: 0.464800 ms MarkObjects: 6.707000 ms  DeleteObjects: 2.994000 ms)
 
 Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 3342.735284 seconds.
+  path: Assets/IA/Enemy RANGE.prefab
+  artifactKey: Guid(1367b04fca504c949b855372b8937a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/Enemy RANGE.prefab using Guid(1367b04fca504c949b855372b8937a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4b161aa328c364f71308a9a1717d99a4') in 1.2494842 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 31
+
+========================================================================
+Received Import Request.
+  Time since last request: 40.861408 seconds.
+  path: Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR2.png
+  artifactKey: Guid(181877ac9c7beb145a23b6672bb3f73d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR2.png using Guid(181877ac9c7beb145a23b6672bb3f73d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2f547bc62573bde57ba6697085fce330') in 0.0170481 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR4.png
+  artifactKey: Guid(d1a185c6efa0c8f4db6c867e6d67bbaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR4.png using Guid(d1a185c6efa0c8f4db6c867e6d67bbaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a398dd6b62600457b14b160f89d9b87f') in 0.0109282 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.018770 seconds.
+  path: Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR1.png
+  artifactKey: Guid(93f23f7345fdc3e468393a21b8c151cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR1.png using Guid(93f23f7345fdc3e468393a21b8c151cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd8720d513a45a61304d65d39effa2091') in 0.0210391 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR3.png
+  artifactKey: Guid(1d1409731d8a2d44f91eff62cbfcdd21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ANDAR/ENEMIGO BASURA CAMINAR3.png using Guid(1d1409731d8a2d44f91eff62cbfcdd21) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '298621790837cbb3030cc72160e8e2fe') in 0.0166062 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.850325 seconds.
+  path: Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR2.png
+  artifactKey: Guid(2fd57756c9a021f4ab08e3660e101024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR2.png using Guid(2fd57756c9a021f4ab08e3660e101024) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0a2e0c5a278d282bd9fbaeaee9df76a3') in 0.008709 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR4.png
+  artifactKey: Guid(3fa820e58c1cb7749adc6a8452ddb769) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR4.png using Guid(3fa820e58c1cb7749adc6a8452ddb769) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ab2c1d05db9b93aae90c482345fe7d33') in 0.0091033 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR6.png
+  artifactKey: Guid(ff82c9ff446b6454593508090dfd8c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR6.png using Guid(ff82c9ff446b6454593508090dfd8c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2f80414d827651303d24143663bdc6ec') in 0.0104227 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.285428 seconds.
+  path: Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR1.png
+  artifactKey: Guid(cf31143f338eda547b5471e8dc4fabf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR1.png using Guid(cf31143f338eda547b5471e8dc4fabf9) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '53ebfe3ade589872bb1302d0068860e5') in 0.0143522 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR6.png
+  artifactKey: Guid(ff82c9ff446b6454593508090dfd8c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/ATAQUE/ENEMIGO BASURA ATACAR6.png using Guid(ff82c9ff446b6454593508090dfd8c40) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e247a76b0b58ea097886831982ea00c6') in 0.0105347 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 46.968430 seconds.
+  path: Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE2.png
+  artifactKey: Guid(9559f0ac6cae4304e8a5613b59c92a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE2.png using Guid(9559f0ac6cae4304e8a5613b59c92a6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cc9b9a480964793e46611d19f79ea5fb') in 0.0110277 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE4.png
+  artifactKey: Guid(eec187f59c9faca4794af4d2f87e17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE4.png using Guid(eec187f59c9faca4794af4d2f87e17d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bf91ea9b963adec0c413dfde752caf88') in 0.0122308 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+
+========================================================================
+Received Import Request.
+  Time since last request: 10.423123 seconds.
+  path: Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE1.png
+  artifactKey: Guid(db515bfaa88e15e43a601a81864eebae) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE1.png using Guid(db515bfaa88e15e43a601a81864eebae) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6e50557f0c71f4e54a2bc0fb4ce1ddf2') in 0.0167089 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE5.png
+  artifactKey: Guid(31bc33e88b084434bb2eda5a2a223300) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/IA/EnemyMelee/MUERTE/ENEMIGO BASURA MUERTE5.png using Guid(31bc33e88b084434bb2eda5a2a223300) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '79aabaf2e552dbdbe56818450967f3b0') in 0.0218393 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 3
+
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0

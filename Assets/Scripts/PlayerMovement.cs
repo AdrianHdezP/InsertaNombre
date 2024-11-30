@@ -66,6 +66,11 @@ public class PlayerMovement : MonoBehaviour
     public int maxHealth = 100;
     [HideInInspector] public int health = 100;
 
+    bool isEnded;
+
+    int numberOfHits;
+    Coroutine poisonCR;
+
     private void Awake()
     {
         inputSystemActions = new InputSystem_Actions();
@@ -95,6 +100,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (health < 0) health = 0;
+
         if (health <= 0) return;
         AxixInputs();
         StateHandler();
@@ -331,15 +338,47 @@ public class PlayerMovement : MonoBehaviour
     public void RecieveDamage(int amount)
     {
         health -= amount;
-        flashAnim.SetTrigger("Flash");
-        if (health <= 0)
+
+        if (health <= 0 && !isEnded)
         {
             health = 0;
+            isEnded = true;
+
+            flashAnim.SetTrigger("Die");
 
             rb.constraints = RigidbodyConstraints.None;
             rb.AddTorque(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1) * 0.35f, ForceMode.Impulse);
             rb.linearDamping = 1;
         }
+        else if (health > 0) 
+        {
+            flashAnim.SetTrigger("Flash");
+        }
+    }
+
+    public void PoisonDamage(int amount, int numberOfHits, float timeBetween)
+    {
+        if (poisonCR == null) poisonCR = StartCoroutine(RecievePoisonDamage(amount, numberOfHits, timeBetween));
+        else this.numberOfHits = numberOfHits;
+    }
+
+    IEnumerator RecievePoisonDamage(int amount, int numberOfHits, float timeBetween)
+    {
+        this.numberOfHits = numberOfHits;
+
+        for (; this.numberOfHits > 0; this.numberOfHits--)
+        {
+            float t = 0;
+            RecieveDamage(amount);
+
+            while (t < timeBetween)
+            {
+                t += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        poisonCR = null;
     }
 
     public void HealDamage(int amount)

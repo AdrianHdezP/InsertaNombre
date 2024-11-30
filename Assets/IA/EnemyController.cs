@@ -4,6 +4,9 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    private Animator anim;
+    private SpriteRenderer spriteRenderer;
+
     [SerializeField] States currentState;
 
     [Header("MOVEMENT")]
@@ -50,6 +53,12 @@ public class EnemyController : MonoBehaviour
         playerCameraTf = FindFirstObjectByType<Camera>().transform;
 
         currentHp = maxHp;
+    }
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     private void Update()
@@ -99,7 +108,7 @@ public class EnemyController : MonoBehaviour
 
             if (canSeePlayer && shotT <= 0)
             {
-                Proyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
+                anim.SetTrigger("Attack");
                 shotT = shotTime;
             }
 
@@ -132,30 +141,42 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
+                //DIE HERE
             }
         }
 
-
+        
         if (currentState != States.stopped && agent.isActiveAndEnabled) agent.destination = targetPosition;
 
 
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.attachedRigidbody && other.attachedRigidbody.TryGetComponent(out PlayerMovement move)) move.PoisonDamage(1, 10, 0.8f);
+    }
+
     public void RecieveDamage(int amount)
     {
-        Debug.Log("RECIEVED DAMAGE");
+        if (currentState == States.dying) return;
+
+            Debug.Log("RECIEVED DAMAGE");
         if (currentHp - amount > 0)
         {
             currentHp -= amount;
             currentState = States.stopped;
             stoppedT = 0;
+            anim.SetTrigger("Hit");
         }
         else
         {
+            agent.enabled = false;
+            GetComponent<Collider>().enabled = false;
+
             currentHp = 0;
             currentState = States.dying;
+            anim.SetTrigger("Death");
         }
     }
 
@@ -319,5 +340,10 @@ public class EnemyController : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void Attack()
+    {
+        Proyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
     }
 }
