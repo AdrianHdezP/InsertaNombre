@@ -11,6 +11,8 @@ public class Interactable_Door : Interactable
 
     public override void Interact()
     {
+        
         anim.SetBool("Open", true);
+        triggered = true;
     }
 }

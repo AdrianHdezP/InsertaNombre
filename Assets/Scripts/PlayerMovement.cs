@@ -54,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private float startYscale;
 
     [Header("Interact")]
-    [SerializeField] private float interactRange = 2.5f;
+    [SerializeField] private float interactRange = 2.5f; 
+    [HideInInspector] public Interactable closestInteractable = null;
 
     [Header("Health")]
     public int maxHealth = 100;
@@ -82,6 +83,8 @@ public class PlayerMovement : MonoBehaviour
         StateHandler();
         SpeedControl();
         GroundCheck();
+
+        GetInteractions();
     }
 
     private void FixedUpdate()
@@ -122,15 +125,16 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    public void InteactAction()
+    void GetInteractions()
     {
         Interactable[] interactables = FindObjectsByType<Interactable>(FindObjectsSortMode.None);
-        Interactable closetInteractable = null;
+        
         float currentDot = 0;
+        closestInteractable = null;
 
         for (int i = 0; i < interactables.Length; i++)
         {
-            if (Vector3.Distance(interactables[i].transform.position, transform.position) < interactRange)
+            if (Vector3.Distance(interactables[i].transform.position, transform.position) < interactRange && !interactables[i].triggered)
             {
                 Vector3 direction = interactables[i].transform.position - cameraPosition.position;
                 float dot = Vector3.Dot(direction, cameraPosition.forward);
@@ -138,13 +142,18 @@ public class PlayerMovement : MonoBehaviour
                 if (dot > currentDot)
                 {
                     currentDot = dot;
-                    closetInteractable = interactables[i];
+                    closestInteractable = interactables[i];                    
                 }
             }
         }
 
-        if (closetInteractable != null)
-            closetInteractable.Interact();
+    }
+
+    public void InteactAction()
+    {
+
+        if (closestInteractable != null)
+            closestInteractable.Interact();
     }
 
     private void StateHandler()
