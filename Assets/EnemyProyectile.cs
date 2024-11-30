@@ -4,6 +4,7 @@ public class EnemyProyectile : MonoBehaviour
 {
     [SerializeField] int damage;
     [SerializeField] float moveSpeed;
+    [SerializeField] float destroyTime = 5;
 
     private void Awake()
     {

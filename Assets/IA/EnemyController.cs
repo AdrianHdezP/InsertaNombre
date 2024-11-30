@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
     float stoppedT;
 
     [Header("WEAPON")]
+    [SerializeField] bool startClosest;
     [SerializeField] float width;
     [SerializeField] float shotTime;
     [SerializeField] EnemyProyectile proyectilePF;
@@ -91,16 +92,15 @@ public class EnemyController : MonoBehaviour
             if (Vector3.Distance(transform.position, playerCameraTf.position) < detectionRange) agent.speed = attackingSpeed;
             else agent.speed = wanderingSpeed;
 
-            if (Vector3.Distance(transform.position, playerCameraTf.position) < distanceRange.y)
-            {
-                FindHitPosition();
 
-                if (canSeePlayer && shotT <= 0)
-                {
-                    EnemyProyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
-                    shotT = shotTime;
-                }
+            FindHitPosition();
+
+            if (canSeePlayer && shotT <= 0)
+            {
+                EnemyProyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
+                shotT = shotTime;
             }
+
 
             if (shotT > 0)
             {
@@ -175,24 +175,67 @@ public class EnemyController : MonoBehaviour
         else
         {
             canSeePlayer = false;
-            float range = distanceRange.y;
 
-            for (; range > distanceRange.x; range -= 0.5f)
+            if (startClosest)
             {
-                for (float i = 0; i < 1; i += 0.05f)
+                float range = distanceRange.x;
+
+                for (; range > distanceRange.y; range += (distanceRange.y - distanceRange.x) * 0.1f)
                 {
-                    Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-                    rotation *= Quaternion.AngleAxis(-45 + 90 * i, Vector3.up);
+                    Vector3 middleFire = playerCameraTf.position + direction * range;
 
-                    Vector3 firePosition = playerCameraTf.position + (rotation * Vector3.forward) * range;
-
-                    if (CheckRays(firePosition))
+                    if (CheckRays(middleFire))
                     {
-                        targetPosition = firePosition;
+                        targetPosition = middleFire;
                         return true;
+                    }
+
+                    for (float i = 0; i < 1; i += 0.05f)
+                    {
+                        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+                        rotation *= Quaternion.AngleAxis(-45 + 90 * i, Vector3.up);
+
+                        Vector3 firePosition = playerCameraTf.position + (rotation * Vector3.forward) * range;
+
+                        if (CheckRays(firePosition))
+                        {
+                            targetPosition = firePosition;
+                            return true;
+                        }
                     }
                 }
             }
+            else
+            {
+                float range = distanceRange.y;
+
+                for (; range > distanceRange.x; range -= (distanceRange.y - distanceRange.x) * 0.1f)
+                {
+                    Vector3 middleFire = playerCameraTf.position + direction * range;
+
+                    if (CheckRays(middleFire))
+                    {
+                        targetPosition = middleFire;
+                        return true;
+                    }
+
+                    for (float i = 0; i < 1; i += 0.05f)
+                    {
+                        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+                        rotation *= Quaternion.AngleAxis(-45 + 90 * i, Vector3.up);
+
+                        Vector3 firePosition = playerCameraTf.position + (rotation * Vector3.forward) * range;
+
+                        if (CheckRays(firePosition))
+                        {
+                            targetPosition = firePosition;
+                            return true;
+                        }
+                    }
+                }
+            }
+
+
 
             targetPosition = playerCameraTf.position;
             return false;
@@ -212,7 +255,7 @@ public class EnemyController : MonoBehaviour
         {
             ray.origin = meshHit.position + baseOffset;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, distanceRange.y, obstacleLayer))
             {
                 if (!hit.transform.gameObject.CompareTag("Player"))
                 {
@@ -235,7 +278,7 @@ public class EnemyController : MonoBehaviour
         {
             ray.origin = meshHit.position + baseOffset;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, distanceRange.y, obstacleLayer))
             {
                 if (!hit.transform.gameObject.CompareTag("Player"))
                 {
@@ -258,7 +301,7 @@ public class EnemyController : MonoBehaviour
         {
             ray.origin = meshHit.position + baseOffset;
 
-            if (Physics.Raycast(ray, out RaycastHit hit, detectionRange, obstacleLayer))
+            if (Physics.Raycast(ray, out RaycastHit hit, distanceRange.y, obstacleLayer))
             {
                 if (!hit.transform.gameObject.CompareTag("Player"))
                 {
