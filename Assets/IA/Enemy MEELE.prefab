@@ -58,9 +58,9 @@ Transform:
   m_GameObject: {fileID: 3771751718777875652}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 2.75, y: 2.75, z: 2.75}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2579869294918643592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b718265b70cae374d9acab5cdff33d54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 1114530331904505377}
   - component: {fileID: 1004060007424689955}
   - component: {fileID: 8657846829415405834}
+  - component: {fileID: 1796175404842896047}
   m_Layer: 7
   m_Name: Enemy MEELE
   m_TagString: Untagged
@@ -241,7 +242,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.9
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -279,9 +280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dd9a63a498fb44abd09f6dca974bde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audios: {fileID: 0}
   currentState: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  attackingSpeed: 3.4
+  attackingSpeed: 4
   wanderingSpeed: 3.4
   distanceRange: {x: 0.5, y: 2}
   pathPoints: []
@@ -295,8 +297,30 @@ MonoBehaviour:
   visionTf: {fileID: 5669046550974425947}
   maxHp: 150
   detectionRange: 20
-  stoppedTime: 0.35
+  stoppedTime: 0.2
   startClosest: 1
   width: 1
   shotTime: 1.5
   proyectilePF: {fileID: 384755829378652661, guid: b3e1f470cf2fbc84d955353c8836a998, type: 3}
+--- !u!95 &1796175404842896047
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4388960640039650879}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8559e0dd12bd484ba963a707c6c2bfa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
