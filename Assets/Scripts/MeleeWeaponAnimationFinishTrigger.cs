@@ -6,7 +6,7 @@ public class MeleeWeaponAnimationFinishTrigger : MonoBehaviour
 
     [HideInInspector] public Animator anim;
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
     }

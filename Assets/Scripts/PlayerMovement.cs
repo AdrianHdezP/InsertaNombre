@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraPosition;
 
     [Header("Movement")]
+    [SerializeField] private Animator flashAnim;
     [SerializeField] private Transform orientation;
     [SerializeField] private float walkSpeed;
     [SerializeField] private float sprintSpeed;
@@ -22,11 +23,13 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
-    private float moveSpeed;
     private bool readyToJump;
     private bool crouching = false;
+    private float moveSpeed;
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+
+    public Vector2 input {  get; private set; }
 
     [HideInInspector] public bool isSliding;
 
@@ -76,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         inputSystemActions.Player.Interact.performed += InteractPerformed;
-        //inputSystemActions.Player.Interact.canceled += InteractCanceled;
 
         rb.freezeRotation = true;
 
@@ -93,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(canInteract);
+        if (health <= 0) return;
         AxixInputs();
         StateHandler();
         SpeedControl();
@@ -117,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AxixInputs()
     {
-        Vector2 input = inputActions.actions["Move"].ReadValue<Vector2>();
+        input = inputActions.actions["Move"].ReadValue<Vector2>();
         horizontalInput = input.x;
         verticalInput = input.y;
     }
@@ -177,11 +179,6 @@ public class PlayerMovement : MonoBehaviour
     {
         canInteract = true;
         StartCoroutine(Wait());
-    }
-
-    private void InteractCanceled(InputAction.CallbackContext context)
-    {
-        canInteract= false;
     }
 
     public void InteactAction()
@@ -331,12 +328,26 @@ public class PlayerMovement : MonoBehaviour
 
     #region Health
 
-    public void RecieveDamage(int amount) => health -= amount;
+    public void RecieveDamage(int amount)
+    {
+        health -= amount;
+        flashAnim.SetTrigger("Flash");
+        if (health <= 0)
+        {
+            health = 0;
+
+            rb.constraints = RigidbodyConstraints.None;
+            rb.AddTorque(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1) * 0.35f, ForceMode.Impulse);
+            rb.linearDamping = 1;
+        }
+    }
 
     public void HealDamage(int amount)
     {
-        if (health + amount < maxHealth) health += amount;
-        else health = maxHealth;
+        if (health + amount < maxHealth) 
+            health += amount;
+        else 
+            health = maxHealth;
     }
 
     #endregion

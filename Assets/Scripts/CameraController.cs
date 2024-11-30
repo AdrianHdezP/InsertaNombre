@@ -17,6 +17,11 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.playerSC.health <= 0)
+        {
+            transform.SetParent(orientation);
+            return;
+        }
         Vector2 input = inputActions.actions["Look"].ReadValue<Vector2>();     
         
         float mouseX = input.x * sensX;

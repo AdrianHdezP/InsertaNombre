@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Weapon : MonoBehaviour
 {
+    private PlayerMovement playerMovement;
     private InputSystem_Actions inputSystemActions;
 
     [SerializeField] private GameObject meleeWeapon;
@@ -32,6 +33,7 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        playerMovement = GetComponent<PlayerMovement>();
         inputSystemActions.Player.Shoot.performed += ShootingPerformed;
         inputSystemActions.Player.Shoot.canceled += ShootingCanceled;
 
@@ -50,6 +52,29 @@ public class Weapon : MonoBehaviour
 
         if (pressed)
             ShootAction();
+
+        if (playerMovement.input != Vector2.zero)
+        {
+            if (isRange)
+            {
+                rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Move", true);
+            }
+            else
+            {
+                meleeWeapon.GetComponent<MeleeWeaponAnimationFinishTrigger>().anim.SetBool("Move", true);
+            }
+        }
+        else
+        {
+            if (isRange)
+            {
+                rangeWeapon.GetComponent<RangeWeaponAnimationFinishTrigger>().anim.SetBool("Move", false);
+            }
+            else
+            {
+                meleeWeapon.GetComponent<MeleeWeaponAnimationFinishTrigger>().anim.SetBool("Move", false);
+            }
+        }
     }
 
     public void ChangeWeaponAction()
@@ -64,7 +89,7 @@ public class Weapon : MonoBehaviour
         {
             isRange = true;
             rangeWeapon.SetActive(true);
-            meleeWeapon.SetActive(false);   
+            meleeWeapon.SetActive(false);
         }
     }
 
@@ -94,15 +119,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    private void ShootingPerformed(InputAction.CallbackContext context)
-    {
-        pressed = true;
-    }
+    private void ShootingPerformed(InputAction.CallbackContext context) => pressed = true;
 
-    private void ShootingCanceled(InputAction.CallbackContext context)
-    {
-        pressed = false;
-    }
+    private void ShootingCanceled(InputAction.CallbackContext context) => pressed = false;
 
     public void ShootAction()
     {
