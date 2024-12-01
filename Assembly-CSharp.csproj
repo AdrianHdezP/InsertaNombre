@@ -67,6 +67,7 @@
     <Compile Include="Assets\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Audios.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\Notifier.cs" />
     <Compile Include="Assets\NewInputSystem\InputSystem_Actions.cs" />
     <Compile Include="Assets\Scripts\PickUp.cs" />
     <Compile Include="Assets\GameWinner.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\Scripts\CameraHolder.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\RangeWeaponAnimationFinishTrigger.cs" />
+    <Compile Include="Assets\Scripts\Notice.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>
   <ItemGroup>
