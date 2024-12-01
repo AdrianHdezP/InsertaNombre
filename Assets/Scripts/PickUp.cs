@@ -24,6 +24,7 @@ public class PickUp : MonoBehaviour
             {
                 audioSource.PlayOneShot(Audios.instance.healItem);
                 move.HealDamage(amount);
+                Notifier.instance.AddNotice("You have picked up a heal", Color.red);
                 Destroy(gameObject, 0.5f);
             }
         }
@@ -34,6 +35,7 @@ public class PickUp : MonoBehaviour
             {
                 audioSource.PlayOneShot(Audios.instance.ammoItem);
                 weapon.RestoreAmmo(amount);
+                Notifier.instance.AddNotice("You have picked up " + amount + " ammo", Color.blue);
                 Destroy(gameObject, 0.5f);
             }
         }

@@ -146,7 +146,9 @@ public class GameManager : MonoBehaviour
         shakeAnim.SetBool("Shake", true);
         Debug.Log("Acaba llamada");
         SetObjectiveText("ESCAPE FROM THE DEMOLITION SITE!");
-        
+        Notifier.instance.AddNotice("MISSION UPDATE: ESCAPE FROM THE DEMOLITION SITE!", Color.yellow);
+
+
         winningLine.SetActive(true);
 
         timeTextMesh.color = Color.red;

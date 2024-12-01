@@ -9,6 +9,7 @@ public class Interactable_Hostage : Interactable
     public override void Interact()
     {
         GameManager.Instance.AddHostage();
+        Notifier.instance.AddNotice("You have found a lost animal", Color.yellow);
         triggered = true;
         audio.Play();
         particleS.Play();

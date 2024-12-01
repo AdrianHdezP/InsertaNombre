@@ -16,6 +16,7 @@ public class Interactable_Door : Interactable
         audiosource.Play(); 
         GameManager.Instance.playerSC.anim.SetTrigger("Kick");
         anim.SetBool("Open", true);
+        Notifier.instance.AddNotice("You have opened a door", Color.yellow);
         triggered = true;
     }
 }
