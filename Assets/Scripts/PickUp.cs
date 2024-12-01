@@ -4,10 +4,16 @@ public class PickUp : MonoBehaviour
 {
     [SerializeField] Types type;
     [SerializeField] int amount;
+
+    private AudioSource audioSource;
     enum Types
     {
         ammo,
         heal
+    }
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,8 +22,9 @@ public class PickUp : MonoBehaviour
         {
             if (type == Types.heal && move.health < move.maxHealth)
             {
+                audioSource.PlayOneShot(Audios.instance.healItem);
                 move.HealDamage(amount);
-                Destroy(gameObject);
+                Destroy(gameObject, 0.5f);
             }
         }
 
@@ -25,8 +32,9 @@ public class PickUp : MonoBehaviour
         {
             if (type == Types.ammo)
             {
+                audioSource.PlayOneShot(Audios.instance.ammoItem);
                 weapon.RestoreAmmo(amount);
-                Destroy(gameObject);
+                Destroy(gameObject, 0.5f);
             }
         }
 

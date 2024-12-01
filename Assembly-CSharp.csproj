@@ -64,6 +64,7 @@
     <Compile Include="Assets\IA\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Proyectile.cs" />
     <Compile Include="Assets\Scripts\Interactable_Door.cs" />
+    <Compile Include="Assets\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Audios.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\NewInputSystem\InputSystem_Actions.cs" />
@@ -75,6 +76,8 @@
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\Interactable_Bomb.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\FallingDebris.cs" />
+    <Compile Include="Assets\Scripts\Debris.cs" />
     <Compile Include="Assets\Scripts\CameraHolder.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\RangeWeaponAnimationFinishTrigger.cs" />

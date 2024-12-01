@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public PlayerMovement playerSC;
     [HideInInspector] public Weapon playerWeaponSC;
+    [HideInInspector] public FallingDebris fallingDebis;
     [HideInInspector] public int hostageCount;
     public int bombsLeft;
     private bool ending;
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] float secondsLeft;
     public int timeInSeconds;
     float secT;
+    
+    [SerializeField] AudioSource music1;
+    [SerializeField] AudioSource music2;
+    [SerializeField] AudioSource earthquake;
+    [SerializeField] AudioSource davidVoice;
     public static GameManager Instance
     {
         get
@@ -44,13 +50,17 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        fallingDebis = FindFirstObjectByType<FallingDebris>();
         playerSC = FindFirstObjectByType<PlayerMovement>();
         playerWeaponSC = FindFirstObjectByType<Weapon>();
 
         totalBombs = FindObjectsByType<Interactable_Bomb>(FindObjectsSortMode.None);
         bombsLeft = totalBombs.Length;
     }
-
+    private void Start()
+    {
+        davidVoice.PlayOneShot(Audios.instance.davidStart);
+    }
     private void Update()
     {
         UIControl();
@@ -122,8 +132,13 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PizzaTowerTime()
     {
+        music1.Stop();
+        music2.Play();
+        earthquake.Play();
+        davidVoice.PlayOneShot(Audios.instance.davidEnd);
         Debug.Log("Llamada");
         yield return new WaitForSeconds(2);
+        fallingDebis.StartSpawning();
         Debug.Log("Acaba llamada");
 
         timeTextMesh.color = Color.red;

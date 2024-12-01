@@ -141,6 +141,11 @@ public class EnemyController : MonoBehaviour
             {
                 stoppedT += Time.deltaTime;
                 targetPosition = transform.position;
+                if(!startClosest)
+                {
+                    audioSource.Stop();
+                    audioSource.PlayOneShot(audios.enemyRangeDying);
+                }
             }
             else
             {
