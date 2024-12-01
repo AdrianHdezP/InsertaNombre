@@ -13,6 +13,6 @@ public class LookAtCamera : MonoBehaviour
         Vector3 cameraFlatPos = cameraTF.position;
        cameraFlatPos.y = transform.position.y;
 
-       transform.rotation = Quaternion.LookRotation(cameraFlatPos - transform.position, Vector3.up);
+       transform.rotation = Quaternion.LookRotation(transform.position - cameraFlatPos, Vector3.up);
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI actionTextMesh;
     [SerializeField] TextMeshProUGUI objectiveTextMesh;
     [SerializeField] GameObject weaponBullets;
+
+    public GameObject pantallamuerte;
 
     [SerializeField] GameObject winningLine;
     [SerializeField] Animator shakeAnim;
@@ -181,12 +184,19 @@ public class GameManager : MonoBehaviour
 
     private void Lose()
     {
-        Debug.Log("Has perdido pringado");
-        //Pantalla titulo
+        StartCoroutine(Pereza());
     }
 
     public void SetObjectiveText(string text)
     {
         objectiveTextMesh.text = text;
+    }
+
+    IEnumerator Pereza()
+    {
+        yield return new WaitForSeconds(2.5f);
+        pantallamuerte.SetActive(true);
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene("Main Menu");
     }
 }
