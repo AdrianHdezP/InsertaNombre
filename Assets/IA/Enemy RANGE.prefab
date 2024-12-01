@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 681d0c825e387384f9a2fca2dc9e5d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -267,7 +267,7 @@ MonoBehaviour:
   visionTf: {fileID: 1410556125524808281}
   maxHp: 100
   detectionRange: 25
-  stoppedTime: 0.3
+  stoppedTime: 0.2
   startClosest: 0
   width: 1
   shotTime: 1
@@ -304,9 +304,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -775468133607867594, guid: 77376b7f8cfc1e94ba506a93be402078, type: 2}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: c94f07fa8fded564e96da66211a39d8b, type: 3}
+  m_Resource: {fileID: 8300000, guid: c94f07fa8fded564e96da66211a39d8b, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

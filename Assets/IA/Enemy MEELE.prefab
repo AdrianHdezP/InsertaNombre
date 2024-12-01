@@ -87,7 +87,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 681d0c825e387384f9a2fca2dc9e5d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -283,9 +283,9 @@ MonoBehaviour:
   audios: {fileID: 0}
   currentState: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  attackingSpeed: 4
+  attackingSpeed: 5
   wanderingSpeed: 3.4
-  distanceRange: {x: 0.5, y: 2}
+  distanceRange: {x: 0.6, y: 2.5}
   pathPoints: []
   pathIndex: 0
   playerLayer:
@@ -297,10 +297,10 @@ MonoBehaviour:
   visionTf: {fileID: 5669046550974425947}
   maxHp: 150
   detectionRange: 20
-  stoppedTime: 0.2
+  stoppedTime: 0.15
   startClosest: 1
   width: 1
-  shotTime: 1.5
+  shotTime: 1.7
   proyectilePF: {fileID: 384755829378652661, guid: b3e1f470cf2fbc84d955353c8836a998, type: 3}
 --- !u!95 &1796175404842896047
 Animator:

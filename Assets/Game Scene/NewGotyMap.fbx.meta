@@ -3,7 +3,47 @@ guid: cf5c10b807bdcf34fbb7d7aa0a303f28
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Asphalt-02
+    second: {fileID: 2100000, guid: e1b1f3bab0f24974b96a9fa85e00a60a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Asphalt-02.002
+    second: {fileID: 2100000, guid: fe8417674f8befa4993dac3acedfa4b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Box Barrel
+    second: {fileID: 2100000, guid: 62fa27cb7fe0ea44781557dc4c2c4441, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrickWall
+    second: {fileID: 2100000, guid: 31b50cd49faac23448fd2cfa49876b7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete-02
+    second: {fileID: 2100000, guid: e8482dae723538a4a8d217fdfaddca10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Concrete-02.002
+    second: {fileID: 2100000, guid: 8a61c6bd0deefd94f920a288ca42c84f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteWall
+    second: {fileID: 2100000, guid: 776d5e6a6fb20ec4d8ba8f75e31c0402, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ConcreteWall2
+    second: {fileID: 2100000, guid: 6eb44da222644e446a4ced9e6da311d8, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +128,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0085
+    globalScale: 0.85
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

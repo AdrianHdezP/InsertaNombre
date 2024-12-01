@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform cameraPosition;
     [SerializeField] private AudioSource playerEffects;
     [SerializeField] private AudioSource eqRadio;
+    [SerializeField] private GameObject poisonEffect;
     public GameObject kick;
 
     [Header("Movement")]
@@ -400,6 +401,8 @@ public class PlayerMovement : MonoBehaviour
     {
         this.numberOfHits = numberOfHits;
 
+        poisonEffect.SetActive(true);
+
         for (; this.numberOfHits > 0; this.numberOfHits--)
         {
             float t = 0;
@@ -412,6 +415,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        poisonEffect.SetActive(false);
         poisonCR = null;
     }
 

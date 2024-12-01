@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 681d0c825e387384f9a2fca2dc9e5d44, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 475907703137665354}
   - component: {fileID: 384755829378652661}
   - component: {fileID: -7565733089258429053}
+  - component: {fileID: 7356753420570375918}
   m_Layer: 8
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -223,8 +224,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b797f129b06894aa0aa299886331df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 15
-  moveSpeed: 16
+  damage: 22
+  moveSpeed: 18
   destroyTime: 5
 --- !u!54 &-7565733089258429053
 Rigidbody:
@@ -250,6 +251,28 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!95 &7356753420570375918
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8034673702139414181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9df0669259041c143aa8f59d32569ca6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
