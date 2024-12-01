@@ -23,6 +23,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public bool canShoot;
     [HideInInspector] public bool pressed;
     [HideInInspector] public bool isRange;
+    [HideInInspector] public bool click;
 
     public Proyectile bulletsPrefab;
     public Proyectile meleePrefab;
@@ -44,6 +45,8 @@ public class Weapon : MonoBehaviour
         canReload = false;
         isRange = true;
         canSwaap = true;
+        click = false;
+        
     }
 
     private void Update()
@@ -147,6 +150,11 @@ public class Weapon : MonoBehaviour
 
             if (CanShoot())
                 ShootAnimation();
+
+            if (magazine == 0 && totalBullets == 0 && !click)
+            {        
+                StartCoroutine(ClickNoise());
+            }
         }
         else
         {
@@ -155,6 +163,15 @@ public class Weapon : MonoBehaviour
                 Melee();
             }
         }
+    }
+
+    IEnumerator ClickNoise()
+    {
+        click = true;
+        weaponEffects.volume = 0.6f;
+        weaponEffects.PlayOneShot(audios.emptyGun);
+        yield return new WaitForSeconds(1);
+        click = false;
     }
 
     private bool CanReload() => canReload;

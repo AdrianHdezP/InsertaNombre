@@ -12,6 +12,7 @@ public class Audios : MonoBehaviour
     public AudioClip rangeAttack;
     public AudioClip rangeReload;
     public AudioClip meleeAttack;
+    public AudioClip emptyGun;
 
     [Header("PickUp Effects")]
     public AudioClip healItem;
