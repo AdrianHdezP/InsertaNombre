@@ -355,8 +355,4 @@ public class EnemyController : MonoBehaviour
         Proyectile proyectile = Instantiate(proyectilePF, visionTf.position, Quaternion.LookRotation(playerCameraTf.position - visionTf.position));
     }
 
-    public void RangeAttackSound()
-    {
-        audioSource.Play();
-    }
 }

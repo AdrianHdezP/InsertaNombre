@@ -48,7 +48,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (magazine < 15 && totalBullets > 0)
+        if (magazine < 15 && totalBullets > 0 && isRange)
             canReload = true;
 
         if (magazine <= 0)
@@ -150,7 +150,7 @@ public class Weapon : MonoBehaviour
         }
         else
         {
-            if (CanShoot())
+            if (canSwaap)
             {
                 Melee();
             }

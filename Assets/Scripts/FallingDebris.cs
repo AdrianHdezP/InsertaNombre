@@ -7,6 +7,7 @@ public class FallingDebris : MonoBehaviour
     [SerializeField] private float followHeight = 10f; // Altura del techo invisible
     [SerializeField] private float spawnRadius = 5f; // Radio alrededor del jugador para caer escombros
     [SerializeField] private float spawnInterval = 0.5f; // Intervalo entre caídas
+    [SerializeField] private AudioSource AudioSource;
 
     private bool isSpawning = false;
 
@@ -25,7 +26,7 @@ public class FallingDebris : MonoBehaviour
             // Mantén el techo a cierta altura sobre el jugador
             transform.position = new Vector3(player.position.x, player.position.y + followHeight, player.position.z);
         }
-        StartSpawning();
+        //StartSpawning();
     }
 
     public void StartSpawning()
@@ -33,6 +34,10 @@ public class FallingDebris : MonoBehaviour
         if (!isSpawning)
         {
             isSpawning = true;
+
+            AudioSource.Play();
+           // CameraShake.instance.cr = StartCoroutine(CameraShake.instance.Shake(1, 0.5f));
+
             InvokeRepeating(nameof(SpawnDebris), 0f, spawnInterval);
         }
     }
@@ -56,7 +61,6 @@ public class FallingDebris : MonoBehaviour
         spawnPosition.y = transform.position.y;
 
         // Instancia el escombro
-        CameraShake.instance.cr = StartCoroutine(CameraShake.instance.Shake(1, 0.5f));
         GameObject debris = Instantiate(debrisPrefab, spawnPosition, Quaternion.identity);
         Rigidbody rb = debris.GetComponent<Rigidbody>();
         if (rb != null)

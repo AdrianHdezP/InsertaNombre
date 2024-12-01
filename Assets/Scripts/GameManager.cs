@@ -9,8 +9,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI hpTextMesh;
     [SerializeField] TextMeshProUGUI weaponNameTextMesh;
     [SerializeField] TextMeshProUGUI weaponBulletsTextMesh;
-    [SerializeField] GameObject weaponBullets;
     [SerializeField] TextMeshProUGUI actionTextMesh;
+    [SerializeField] TextMeshProUGUI objectiveTextMesh;
+    [SerializeField] GameObject weaponBullets;
+
+    [SerializeField] GameObject winningLine;
+    [SerializeField] Animator shakeAnim;
 
     [SerializeField] Image faceImage;
     [SerializeField] Sprite[] faceSprites;
@@ -137,9 +141,13 @@ public class GameManager : MonoBehaviour
         earthquake.Play();
         davidVoice.PlayOneShot(Audios.instance.davidEnd);
         Debug.Log("Llamada");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
         fallingDebis.StartSpawning();
+        shakeAnim.SetBool("Shake", true);
         Debug.Log("Acaba llamada");
+        SetObjectiveText("ESCAPE FROM THE DEMOLITION SITE!");
+        
+        winningLine.SetActive(true);
 
         timeTextMesh.color = Color.red;
         timeTextMesh.text = Mathf.FloorToInt(secondsLeft / 60f).ToString("00") + ":" + (secondsLeft % 60).ToString("00");
@@ -173,5 +181,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Has perdido pringado");
         //Pantalla titulo
+    }
+
+    public void SetObjectiveText(string text)
+    {
+        objectiveTextMesh.text = text;
     }
 }

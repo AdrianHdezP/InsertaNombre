@@ -22,13 +22,13 @@ public class CameraController : MonoBehaviour
             transform.SetParent(orientation);
             return;
         }
-        Vector2 input = inputActions.actions["Look"].ReadValue<Vector2>();     
+        Vector2 input = inputActions.actions["Look"].ReadValue<Vector2>() * Time.deltaTime;     
         
         float mouseX = input.x * sensX;
         yRotation += mouseX;
 
         // Actual Rotation
-        transform.rotation = Quaternion.Euler(0, yRotation, 0);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, yRotation, transform.eulerAngles.z);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 
