@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Play()
     {
-        SceneManager.LoadScene("Adri");
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
